@@ -1,0 +1,20 @@
+name: llm_interpretability
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch=1.13
+  - torchvision
+  - torchaudio
+  - cudatoolkit=11.7
+  - transformers
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - jupyter
+  - captum
+  - tqdm
+  - pyyaml
+  - ipython

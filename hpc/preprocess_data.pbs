@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N preprocess_data
+#PBS -l select=1:ncpus=2:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -o logs/preprocess_data.out
+#PBS -e logs/preprocess_data.err
+
+# Load Anaconda module and activate the environment
+module load anaconda
+source activate my_env
+
+# Navigate to the project directory
+cd $PBS_O_WORKDIR
+
+# Run the preprocessing script
+python scripts/preprocess_data.py

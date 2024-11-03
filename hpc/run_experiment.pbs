@@ -1,0 +1,10 @@
+#!/bin/bash
+#PBS -N run_experiments
+#PBS -l select=1:ncpus=8:mem=32gb:ngpus=1
+#PBS -l walltime=04:00:00
+#PBS -o logs/run_experiments.out
+#PBS -e logs/run_experiments.err
+
+module load anaconda
+source activate my_env
+python scripts/run_experiments.py

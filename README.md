@@ -4,7 +4,7 @@
 This project investigates how language models internally deal with input token errors. We analyze activation patterns, attention heads, and pathways to understand error detection mechanisms.
 
 ## Structure Plan
-
+\`\`
 ├── README.md
 ├── environment.yml
 ├── setup.py
@@ -49,3 +49,4 @@ This project investigates how language models internally deal with input token e
 │   └── causal_analysis/
 │
 └── logs/
+\`\`

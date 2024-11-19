@@ -1,10 +1,10 @@
-name: llm_interpretability
+name: hpcenv
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.9
-  - pytorch=1.13
+  - python
+  - pytorch
   - torchvision
   - torchaudio
   - cudatoolkit=11.7

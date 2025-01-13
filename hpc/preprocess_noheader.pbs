@@ -1,16 +1,16 @@
 #!/bin/bash
-#PBS -N preprocess_data
+#PBS -N preprocess_noheader
 #PBS -l select=1:ncpus=2:mem=4gb
 #PBS -l walltime=01:00:00
 #PBS -q v1_short8
-#PBS -o logs/preprocess_data.out
-#PBS -e logs/preprocess_data.err
+#PBS -o logs/preprocess_noheader.out
+#PBS -e logs/preprocess_noheader.err
 
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate hpcenv
 
 # Navigate to the project directory
-cd $PBS_O_WORKDIR
+cd /rds/general/user/ifc24/home/input-error-mechdetect
 
 # Run the preprocessing script
-python scripts/preprocess_data.py
+python scripts/preprocess_noheader.py

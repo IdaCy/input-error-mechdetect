@@ -7,7 +7,7 @@ import traceback
 
 # Paths
 PROCESSED_DATA_PATH = "data/processed/"
-RESULTS_PATH = "results/activations/"
+RESULTS_PATH = "results_all/"
 LOG_FILE = "logs/extract_activations.log"
 
 # Model configuration
@@ -21,8 +21,8 @@ try:
 except Exception as e:
     with open(LOG_FILE, "a") as log_file:
         log_file.write(
-            f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] '" +
-            f"'Model loading failed: {str(e)}\n")
+            f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] " +
+            f"Model loading failed: {str(e)}\n")
     raise e
 
 
@@ -38,14 +38,16 @@ def log(message):
 
 
 # Function to extract activations
-def extract_activations(file_name):
+def extract_activations(file_name, run_id):
     try:
-        log(f"Processing file: {file_name}")
+        log(f"Processing file: {file_name}, Run: {run_id}")
         file_path = os.path.join(PROCESSED_DATA_PATH, file_name)
 
-        # Specify header=None and provide column names
-        df = pd.read_csv(file_path, header=None, names=['sentence', 'tokenized'])
+        # Read CSV file without header
+        df = pd.read_csv(
+            file_path, header=None, names=['sentence', 'tokenized'])
 
+        # Extract activations
         activations = []
         for sentence in df['sentence']:
             inputs = tokenizer(sentence, return_tensors="pt", truncation=True,
@@ -56,11 +58,13 @@ def extract_activations(file_name):
             ).tolist()
             activations.append(last_hidden_state)
 
-        result_file = os.path.join(RESULTS_PATH, f"activations_{file_name}")
+        # Save results
+        result_file = os.path.join(
+            RESULTS_PATH, f"activations_run{run_id}_{file_name}")
         pd.DataFrame(activations).to_csv(result_file, index=False)
         log(f"Activations saved: {result_file}")
     except Exception as e:
-        log(f"Error processing file {file_name}: {str(e)}")
+        log(f"Error processing file {file_name}, Run {run_id}: {str(e)}")
         log(traceback.format_exc())
 
 
@@ -72,7 +76,8 @@ try:
     log("Starting activation extraction...")
     for file_name in os.listdir(PROCESSED_DATA_PATH):
         if file_name.endswith('.csv'):
-            extract_activations(file_name)
+            for run_id in range(1, 6):  # Run each prompt 5 times
+                extract_activations(file_name, run_id)
     log("Activation extraction completed.")
 except Exception as e:
     log(f"Unexpected error: {str(e)}")

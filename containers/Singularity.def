@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: pytorch/pytorch:latest
+
+%post
+    # Update package list and install necessary packages
+    apt-get update && apt-get install -y \
+        python3-pip \
+        git \
+        && rm -rf /var/lib/apt/lists/*
+
+    # Upgrade pip
+    pip3 install --upgrade pip
+
+    # Install required Python packages
+    pip3 install transformers pandas
+
+%environment
+    # Set environment variables
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%runscript
+    # Define the default command to run when the container is executed
+    exec python3 "$@"

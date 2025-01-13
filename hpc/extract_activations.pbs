@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -N extract_activations
+#PBS -l select=1:ncpus=2:ngpus=1:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -o logs/extract_activations.out
+#PBS -e logs/extract_activations.err
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate hpcenv
+
+# Navigate to the project directory
+cd $PBS_O_WORKDIR
+
+# Run the script
+python scripts/extract_activations.py

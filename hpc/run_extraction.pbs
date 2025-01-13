@@ -1,0 +1,10 @@
+#!/bin/bash
+#PBS -N run_extraction
+#PBS -l select=1:ncpus=4:mem=16gb:ngpus=1
+#PBS -l walltime=02:00:00
+#PBS -j oe
+#PBS -o logs/run_extraction.log
+#PBS -e logs/run_extraction.err
+
+cd $PBS_O_WORKDIR
+singularity exec --nv containers/extract_activations.sif python3 scripts/extract_activations.py

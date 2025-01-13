@@ -1,0 +1,12 @@
+#!/bin/bash
+#PBS -N offone_activations
+#PBS -l select=1:ncpus=2:mem=4gb
+#PBS -l walltime=02:00:00
+#PBS -q v1_short8
+#PBS -o logs/offone_activations.log
+#PBS -e logs/offone_activations.err
+
+cd $PBS_O_WORKDIR
+
+# Run the Python script
+singularity exec containers/extract_activations.sif python3 scripts/offone_activations.py

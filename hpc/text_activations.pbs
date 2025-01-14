@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N text_activations
+#PBS -l select=1:ncpus=2:ngpus=1:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -o logs/text_activations.out
+#PBS -e logs/text_activations.err
+
+cd $PBS_O_WORKDIR
+singularity exec --nv containers/extract_activations.sif python3 scripts/text_activations.py

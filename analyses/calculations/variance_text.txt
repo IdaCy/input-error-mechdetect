@@ -1,0 +1,3 @@
+activations_mean_text-sentences_clean.csv: 98.09366044569713
+activations_mean_text-sentences_syntax-error.csv: 98.09386953816617
+activations_mean_text-sentences_typo.csv: 98.09113769709423

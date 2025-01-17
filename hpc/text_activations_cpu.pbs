@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N text_activations_cpu
+#PBS -l select=1:ncpus=2:mem=4gb
+#PBS -l walltime=02:00:00
+#PBS -q v1_short8
+#PBS -o logs/text_activations_cpu.log
+#PBS -e logs/text_activations_cpu.err
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate hpcenv
+
+# Navigate to the project directory
+cd $PBS_O_WORKDIR
+
+# Run the script
+python scripts/text_activations_cpu.py

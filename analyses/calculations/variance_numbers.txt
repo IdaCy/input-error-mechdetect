@@ -1,0 +1,2 @@
+activations_mean_number-sentences_clean.csv: 196.05320145704
+activations_mean_number-sentences_off-by-one.csv: 196.0534214877562
